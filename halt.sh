@@ -1,5 +1,5 @@
 #! /bin/bash
-echo Lancer toutes les VM
+echo Fermer toutes les VM
 cd 41VM1/
 vagrant halt &
 cd ..
@@ -9,12 +9,12 @@ cd ..
 cd 43VM3/
 vagrant halt &
 cd ..
-cd 61VM1/
+cd 61VM1-6/
 vagrant halt &
 cd ..
-cd 62VM2/
+cd 62VM2-6/
 vagrant halt &
 cd ..
-cd 63VM3/
+cd 63VM3-6/
 vagrant halt &
 cd ..
