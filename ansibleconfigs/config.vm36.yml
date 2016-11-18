@@ -18,7 +18,9 @@
 	#LAN1-6    
 	- shell: ip -6 route add fc00:1234:1::/64 via fc00:1234:2::26
 	#LAN1
+    - shell: ip route add 172.16.2.128/28 via 172.16.2.183
 	#LAN2
+    - shell: ip route add 172.16.2.160/28 via 172.16.2.183
 	#LAN3
-
+    - shell: ip route add 172.16.2.144/28 via 172.16.2.183
    
