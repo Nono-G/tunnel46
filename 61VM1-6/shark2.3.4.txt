@@ -1,0 +1,14 @@
+No.     Time           Source                Destination           Protocol Length Info
+      1 0.000000000    172.16.2.1            172.16.2.11           ICMP     84     Echo (ping) request  id=0x0d22, seq=1/256, ttl=64 (no response found!)
+
+Frame 1: 84 bytes on wire (672 bits), 84 bytes captured (672 bits) on interface 0
+Raw packet data
+Internet Protocol Version 4, Src: 172.16.2.1 (172.16.2.1), Dst: 172.16.2.11 (172.16.2.11)
+Internet Control Message Protocol
+
+0000  45 00 00 54 e1 6a 40 00 40 01 fd 11 ac 10 02 01   E..T.j@.@.......
+0010  ac 10 02 0b 08 00 52 10 0d 22 00 01 82 42 38 58   ......R.."...B8X
+0020  00 00 00 00 1a 5f 05 00 00 00 00 00 10 11 12 13   ....._..........
+0030  14 15 16 17 18 19 1a 1b 1c 1d 1e 1f 20 21 22 23   ............ !"#
+0040  24 25 26 27 28 29 2a 2b 2c 2d 2e 2f 30 31 32 33   $%&'()*+,-./0123
+0050  34 35 36 37                                       4567
