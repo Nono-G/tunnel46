@@ -4,18 +4,6 @@
 #define MAXLENMSG 100
 #define PORT_TUNNEL "1450"
 
-int boucle_princ = 1;
-
-int unEcho (int descrSock){
-	char req[MAXLENMSG+1];
-	int lu = recv(descrSock, req, MAXLENMSG, 0);
-	if(lu != 0){
-		req[lu] = '\0';
-		send(descrSock, req, MAXLENMSG, 0);
-	}
-	return(lu != 0);
-}
-
 int initServeur (char* port){
 	
 	struct addrinfo* addrResult;

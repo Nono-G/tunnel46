@@ -12,7 +12,6 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-int recopie(int src, int dst);
 int initServeur(char* port);
 int initClient(char* hote, char* port);
 int ext_in(char* tun, char* hote, char* commandeRoutes);
