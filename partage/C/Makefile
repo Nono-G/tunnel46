@@ -1,4 +1,4 @@
-all: clean tunServ tunCli
+all: tunServ tunCli
 
 iftun.o:
 	gcc -c iftun.c

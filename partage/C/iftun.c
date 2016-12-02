@@ -3,14 +3,14 @@
 int tun_alloc(char* dev){
   struct ifreq ifr;
   int fd, err;
-  /*TRACE*/printf("A\n");
+  //*TRACE*/printf("A\n");
   if( (fd = open("/dev/net/tun", O_RDWR)) < 0 ){
     perror("alloc tun");
     exit(1);
   }
-  /*TRACE*/printf("P\n");
+  //*TRACE*/printf("P\n");
   memset(&ifr, 0, sizeof(ifr));
-  /*TRACE*/printf("R\n");
+  //*TRACE*/printf("R\n");
   /* Flags: IFF_TUN   - TUN device (no Ethernet headers)
    *        IFF_TAP   - TAP device
    *
@@ -20,14 +20,14 @@ int tun_alloc(char* dev){
   if( *dev ){
     strncpy(ifr.ifr_name, dev, IFNAMSIZ);
   }
-  /*TRACE*/printf("E\n");
+  //*TRACE*/printf("E\n");
   if( (err = ioctl(fd, TUNSETIFF, (void *) &ifr)) < 0 ){
     close(fd);
     return err;
   }
-  /*TRACE*/printf("S\n");
+  //*TRACE*/printf("S\n");
   strcpy(dev, ifr.ifr_name);
-  /*TRACE*/printf("L\n");
+  //*TRACE*/printf("L\n");
   return fd;
 }
 

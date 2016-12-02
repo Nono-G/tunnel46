@@ -18,5 +18,5 @@
     - sysctl: name="net.ipv4.ip_forward" value=1 sysctl_set=yes state=present reload=yes #activation du routage
     - shell: ip -6 route add fc00:1234:2::/64 via fc00:1234:1::26 #LAN2-6
     - shell: ip route add 172.16.2.128/28 via 172.16.2.151 #LAN1
-    - shell: ip route add 172.16.2.160/28 via 172.16.2.1 #LAN2
-    - shell: ip route add 172.16.2.176/28 via 172.16.2.1 #LAN4
+    # - shell: ip route add 172.16.2.160/28 via 172.16.2.1 #LAN2  route appliquée dans conf_tun
+    # - shell: ip route add 172.16.2.176/28 via 172.16.2.1 #LAN4  route appliquée dans conf_tun

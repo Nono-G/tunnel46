@@ -2,10 +2,15 @@
 
 int main(int argc, char *argv[])
 {
-	if (argc < 3){
-		printf("USAGE : tunCli [Tun device name] [Host]\n");
+	
+	char sripName[350];
+	if (argc < 4){
+		printf("USAGE : tunCli [Tun device name] [Host] [\"16\" or \"36\"] \n");
 		return 666;
 	}
-	ext_in(argv[1],argv[2]);
+	char commande[100] = "./";
+	strcat(commande, argv[3]);
+	strcat(commande, "configure-routes-tun.sh");
+	ext_in(argv[1],argv[2],commande);
 	return 0;
 }

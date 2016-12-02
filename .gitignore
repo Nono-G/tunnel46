@@ -1,1 +1,9 @@
 */.vagrant/
+*.o
+41VM1/*.yml
+42VM2/*.yml
+43VM3/*.yml
+61VM1-6/*.yml
+62VM2-6/*.yml
+63VM3-6/*.yml
+

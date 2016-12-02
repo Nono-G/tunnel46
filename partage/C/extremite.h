@@ -15,7 +15,7 @@
 int recopie(int src, int dst);
 int initServeur(char* port);
 int initClient(char* hote, char* port);
-int ext_in(char* tun, char* hote);
-int ext_out();
+int ext_in(char* tun, char* hote, char* commandeRoutes);
+int ext_out(char* tun, char* commandesRoutes);
 
 #endif
