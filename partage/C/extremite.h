@@ -12,10 +12,15 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
+#define PORT_TUNNEL "1450"
+#define MAX_TENTATIVES_CONNECT 30
+#define PORT_TUNNEL "1450"
+
 int recopie(int src, int dst);
 int initServeur(char* port);
 int initClient(char* hote, char* port);
-int ext_in(char* tun, char* hote, char* commandeRoutes);
-int ext_out(char* tun, char* commandesRoutes);
+int ext_in(int tun, char* hote);
+int ext_out(int tun);
+int createTun(char* tun, char* commandeRoutes);
 
 #endif
