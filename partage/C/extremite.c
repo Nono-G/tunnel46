@@ -53,8 +53,8 @@ int initClient(char* hote, char* port){
 
 
 
-int ext_in(int descrTun, char* hote){
-	int descrSock = initClient(hote, PORT_TUNNEL);
+int ext_in(int descrTun, char* hote,char* portTunnel){
+	int descrSock = initClient(hote, portTunnel);
 	if(descrSock < 0){
 		fprintf(stderr, "Connection Fail\n");
 		return (descrSock);
@@ -67,7 +67,7 @@ int ext_in(int descrTun, char* hote){
 
 }
 
-int createTun(char* tun, char* commandeRoutes){
+int createTun(char* tun, char* ip){
 	int descrTun = tun_alloc(tun);
 	if(descrTun < 0){
 		fprintf(stderr, "Erreur tunnel\n");
@@ -75,6 +75,8 @@ int createTun(char* tun, char* commandeRoutes){
 	}
 	printf("Tunnel établi\n");
 	system("./configure-tun.sh");
+	char commandeRoutes[130];
+	sprintf(commandeRoutes, "sudo ip addr add %s dev %s", ip,tun);
 	system(commandeRoutes);
 	printf("Attente connection \n");
 	return descrTun;
@@ -82,8 +84,8 @@ int createTun(char* tun, char* commandeRoutes){
 
 
 
-int ext_out(int descrTun){
-	int descrSock = initServeur(PORT_TUNNEL);
+int ext_out(int descrTun, char* portTunnel){
+	int descrSock = initServeur(portTunnel);
 	if (descrSock < 0){
 		fprintf(stderr, "Serveur Init Fail\n");
 		return (descrSock);

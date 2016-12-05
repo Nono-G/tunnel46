@@ -14,13 +14,12 @@
 
 #define PORT_TUNNEL "1450"
 #define MAX_TENTATIVES_CONNECT 30
-#define PORT_TUNNEL "1450"
 
 int recopie(int src, int dst);
 int initServeur(char* port);
 int initClient(char* hote, char* port);
-int ext_in(int tun, char* hote);
-int ext_out(int tun);
+int ext_in(int tun, char* hote,char* portTunnel);
+int ext_out(int tun, char* portTunnel);
 int createTun(char* tun, char* commandeRoutes);
 
 #endif
