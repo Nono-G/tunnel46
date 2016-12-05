@@ -20,6 +20,6 @@ int initServeur(char* port);
 int initClient(char* hote, char* port);
 int ext_in(int tun, char* hote,char* portTunnel);
 int ext_out(int tun, char* portTunnel);
-int createTun(char* tun, char* commandeRoutes);
+int createTun(char* tun, char* ip, char* tunRoutesScript);
 
 #endif

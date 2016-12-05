@@ -67,17 +67,17 @@ int ext_in(int descrTun, char* hote,char* portTunnel){
 
 }
 
-int createTun(char* tun, char* ip){
+int createTun(char* tun, char* ip, char* tunRoutesScript){
 	int descrTun = tun_alloc(tun);
 	if(descrTun < 0){
 		fprintf(stderr, "Erreur tunnel\n");
 		return descrTun;
 	}
 	printf("Tunnel établi\n");
-	system("./configure-tun.sh");
 	char commandeRoutes[130];
 	sprintf(commandeRoutes, "sudo ip addr add %s dev %s", ip,tun);
 	system(commandeRoutes);
+	system(tunRoutesScript);
 	printf("Attente connection \n");
 	return descrTun;
 }

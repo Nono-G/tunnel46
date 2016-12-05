@@ -3,7 +3,7 @@ tun=tun0
 # adresse locale 
 inip=172.16.2.1/28
 inport=1233
-options=ok
+options=./16configure-routes-tun.sh
 # adresse distante
 outip=fc00:1234:2::36
 outport=1233

@@ -29,7 +29,6 @@ int boucle_princ = 1;
 
 void endlerChild() {
     boucle_princ = 0;
-    printf("yes %d\n");
 }
 
 int recopie(int src, int dst){
@@ -39,18 +38,10 @@ int recopie(int src, int dst){
   signal(SIGINT, endlerChild);
   while(boucle_princ == 1){
       nbLus = read(src, buffer, maxSize);
+      if(nbLus < 0){
+        continue;
+      }
       write(dst, buffer, nbLus);
   }
   printf("Fin recopie\n");
 }
-
-// int main (int argc, char** argv){
-//   if (argc != 2) {return 1;}
-//   int tunDescr = tun_alloc(argv[1]);
-//   char* rien = malloc(50*sizeof(char));
-//   //scanf("AAA:%s\n", &rien);
-//   recopie(tunDescr, 1);
-//   close(tunDescr);
-//   free(rien);
-//   return 0;
-// }

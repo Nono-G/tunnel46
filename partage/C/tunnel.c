@@ -6,7 +6,7 @@
 int main(int argc, char* argv[])
 {
 	if(argc < 2){
-		printf("USAGE :  16 pour VM16 ou 32 pour VM36 \n");
+		printf("USAGE :  ./tunnel {nom du fichier config}\n");
 		return -1;
 	}
 
@@ -18,10 +18,7 @@ int main(int argc, char* argv[])
   	char outport[124];
 
 	FILE *fic;
-	if(argv[1] == "16"){
-		fic = fopen("configVM1-6","r");
-	}else 
-		fic = fopen("configVM3-6","r");
+	fic = fopen(argv[1],"r");
 
 	char ignore[TAILLE_MAX] = "";
 
@@ -39,7 +36,14 @@ int main(int argc, char* argv[])
 	
 	fclose(fic);
 
-	int descrTun = createTun(&tun, inip);
+	printf("tun : %s\n",tun);
+	printf("inip : %s\n",inip);
+	printf("inport : %s\n",inport);
+	printf("options : %s\n",options);
+	printf("outip : %s\n",outip);
+  	printf("outport : %s\n",outport);
+
+	int descrTun = createTun(tun, inip, options);
 	
 	if (descrTun < 0 ){
 		printf("Tun Error, try SUDO\n");
