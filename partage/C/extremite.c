@@ -10,14 +10,18 @@ int initServeur (char* port){
 	int descrSock;
 	int descrSockNew;
 	
-	err = getaddrinfo(NULL, port,&filtre, &addrResult);										if(err !=  0){fprintf(stderr,"Erreur 2\n");return -2;}
+	err = getaddrinfo(NULL, port,&filtre, &addrResult);										
+	if(err !=  0){perror("getaddrinfo");fprintf(stderr,"Erreur getaddrinfo serveur\n");return -2;}
 
-	err = socket(addrResult->ai_family, addrResult->ai_socktype, addrResult->ai_protocol);	if(err == -1){fprintf(stderr,"Erreur 3\n");return -3;}
+	err = socket(addrResult->ai_family, addrResult->ai_socktype, addrResult->ai_protocol);
+	if(err == -1){perror("socket"); fprintf(stderr,"Erreur socket serveur\n");return -3;}
 	descrSock = err;
-	err = bind(descrSock, addrResult->ai_addr, sizeof(struct sockaddr_in6));				if(err == -1){fprintf(stderr,"Erreur 4\n");return -4;}
+	err = bind(descrSock, addrResult->ai_addr, sizeof(struct sockaddr_in6));
+	if(err == -1){perror("bind"); fprintf(stderr,"Erreur bind serveur\n");return -4;}
 	freeaddrinfo(addrResult);
 	
-	err = listen(descrSock, SOMAXCONN);if(err == -1){printf("Erreur 5\n");exit(5);}
+	err = listen(descrSock, SOMAXCONN);
+	if(err == -1){perror("listen"); printf("Erreur listen serveur\n");return -5;}
 	 
 	return descrSock;
 }
@@ -26,8 +30,10 @@ int initClient(char* hote, char* port){
 	struct addrinfo *resol;
 	int err;
 	int descrSock;
-	err = getaddrinfo(hote,port,NULL, &resol); 												if(err != 0){fprintf(stderr, "Erreur 2\n");return -2;}
-	err = socket(resol->ai_family,resol->ai_socktype, resol->ai_protocol);					if(err == -1){fprintf(stderr, "Erreur 3\n");return -3;}
+	err = getaddrinfo(hote,port,NULL, &resol);
+	if(err != 0){perror("getaddrinfo"); fprintf(stderr, "Erreur getaddrinfo client\n");return -2;}
+	err = socket(resol->ai_family,resol->ai_socktype, resol->ai_protocol);
+	if(err == -1){perror("socket"); fprintf(stderr, "Erreur socket client\n");return -3;}
 	descrSock = err;
 	int tentatives = 0;
 	do{
@@ -44,14 +50,20 @@ int initClient(char* hote, char* port){
 	return descrSock;
 }
 
+
+
+
 int ext_in(int descrTun, char* hote){
 	int descrSock = initClient(hote, PORT_TUNNEL);
 	if(descrSock < 0){
 		fprintf(stderr, "Connection Fail\n");
 		return (descrSock);
 	}
-	printf("Connection établie\n");
+	printf("Client : Connection établie\n");
 	recopie(descrTun,descrSock);
+	printf("Fin recopie client\n");
+	
+	close(descrSock);
 
 }
 
@@ -68,6 +80,8 @@ int createTun(char* tun, char* commandeRoutes){
 	return descrTun;
 }
 
+
+
 int ext_out(int descrTun){
 	int descrSock = initServeur(PORT_TUNNEL);
 	if (descrSock < 0){
@@ -75,10 +89,11 @@ int ext_out(int descrTun){
 		return (descrSock);
 	}
 	int descrClient = accept(descrSock,NULL,NULL);
-	printf("Connection établie \n");
-
+	
+	printf("Serveur : Connection établie \n");
 	recopie(descrClient,descrTun);
-
+	printf("Fin recopie serveur\n");
+	
 	// shutdown(descrClient, SHUT_RDRW);
 	close(descrClient);
 	// shutdown(descrSock, SHUT_RDRW);

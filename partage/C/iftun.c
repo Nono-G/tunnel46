@@ -3,14 +3,11 @@
 int tun_alloc(char* dev){
   struct ifreq ifr;
   int fd, err;
-  //*TRACE*/printf("A\n");
   if( (fd = open("/dev/net/tun", O_RDWR)) < 0 ){
     perror("alloc tun");
     exit(1);
   }
-  //*TRACE*/printf("P\n");
   memset(&ifr, 0, sizeof(ifr));
-  //*TRACE*/printf("R\n");
   /* Flags: IFF_TUN   - TUN device (no Ethernet headers)
    *        IFF_TAP   - TAP device
    *
@@ -20,14 +17,11 @@ int tun_alloc(char* dev){
   if( *dev ){
     strncpy(ifr.ifr_name, dev, IFNAMSIZ);
   }
-  //*TRACE*/printf("E\n");
   if( (err = ioctl(fd, TUNSETIFF, (void *) &ifr)) < 0 ){
     close(fd);
     return err;
   }
-  //*TRACE*/printf("S\n");
   strcpy(dev, ifr.ifr_name);
-  //*TRACE*/printf("L\n");
   return fd;
 }
 
@@ -35,6 +29,7 @@ int boucle_princ = 1;
 
 void endlerChild() {
     boucle_princ = 0;
+    printf("yes %d\n");
 }
 
 int recopie(int src, int dst){
@@ -42,7 +37,7 @@ int recopie(int src, int dst){
   int maxSize = 8192;
   char buffer[maxSize];
   signal(SIGINT, endlerChild);
-  while(boucle_princ){
+  while(boucle_princ == 1){
       nbLus = read(src, buffer, maxSize);
       write(dst, buffer, nbLus);
   }
