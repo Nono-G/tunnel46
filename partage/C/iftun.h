@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>

@@ -31,14 +31,22 @@ int tun_alloc(char* dev){
   return fd;
 }
 
+int boucle_princ = 1; 
+
+void endlerChild() {
+    boucle_princ = 0;
+}
+
 int recopie(int src, int dst){
   int nbLus;
   int maxSize = 8192;
   char buffer[maxSize];
-  while(1){
+  signal(SIGINT, endlerChild);
+  while(boucle_princ){
       nbLus = read(src, buffer, maxSize);
       write(dst, buffer, nbLus);
   }
+  printf("Fin recopie\n");
 }
 
 // int main (int argc, char** argv){
