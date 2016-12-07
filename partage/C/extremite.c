@@ -61,10 +61,8 @@ int ext_in(int descrTun, char* hote,char* portTunnel){
 	}
 	printf("Client : Connection établie\n");
 	recopie(descrTun,descrSock);
-	printf("Fin recopie client\n");
-	
 	close(descrSock);
-
+	printf("Fin recopie client\n");
 }
 
 int createTun(char* tun, char* ip, char* tunRoutesScript){
@@ -93,12 +91,9 @@ int ext_out(int descrTun, char* portTunnel){
 	int descrClient = accept(descrSock,NULL,NULL);
 	
 	printf("Serveur : Connection établie \n");
-	recopie(descrClient,descrTun);
-	printf("Fin recopie serveur\n");
-	
-	// shutdown(descrClient, SHUT_RDRW);
+	recopie(descrClient,descrTun);	
 	close(descrClient);
-	// shutdown(descrSock, SHUT_RDRW);
 	close(descrSock);
+	printf("Fin recopie serveur\n");
 	return 0;
 }
